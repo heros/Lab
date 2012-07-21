@@ -163,6 +163,63 @@ INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type
 (@ENTRY,0,3,0,0,0,100,0,8000,11000,23000,26500,11,79863,0,0,0,0,0,2,0,0,0,0,0,0,0,'Cast Hemorrhage');
 
 -- Commander Fastfuse
+SET @ENTRY := 47620;
+UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry`=@ENTRY;
+DELETE FROM `smart_scripts` WHERE `source_type`=0 AND `entryorguid`=@ENTRY;
+INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
+(@ENTRY,0,0,0,4,0,100,1,0,0,0,0,11,32064,0,0,0,0,0,1,0,0,0,0,0,0,0,'Cast Battle Shout on Aggro'),
+(@ENTRY,0,1,0,2,0,100,0,0,40,20000,21000,11,79878,0,0,0,0,0,2,0,0,0,0,0,0,0,'Cast Bloodthirst at 40% HP'),
+(@ENTRY,0,2,0,0,0,100,0,2000,4500,16000,17000,11,11977,0,0,0,0,0,2,0,0,0,0,0,0,0,'Cast Rend'),
+(@ENTRY,0,3,0,0,0,100,0,8000,9000,22000,28000,11,79881,0,0,0,0,0,2,0,0,0,0,0,0,0,'Cast Slam');
+
+-- Den Whomper
+SET @ENTRY := 40959;
+UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry`=@ENTRY;
+DELETE FROM `smart_scripts` WHERE `source_type`=0 AND `entryorguid`=@ENTRY;
+INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
+(@ENTRY,0,0,0,4,0,25,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Say Text on Aggro'),
+(@ENTRY,0,1,0,9,0,100,0,0,5,15000,17000,11,80182,0,0,0,0,0,2,0,0,0,0,0,0,0,'Cast Uppercut on Close'),
+(@ENTRY,0,2,0,2,0,100,0,0,60,14000,16000,11,4955,0,0,0,0,0,1,0,0,0,0,0,0,0,'Cast Fist of Stone at 60% HP'),
+(@ENTRY,0,3,0,2,0,100,0,0,30,32000,35000,11,21049,0,0,0,0,0,1,0,0,0,0,0,0,0,'Cast Bloodlust at 30% HP');
+-- NPC talk text insert
+SET @ENTRY := 40959;
+DELETE FROM `creature_text` WHERE `entry`=@ENTRY;
+INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
+(@ENTRY,0,0, 'Raaar!!! Me smash $r!',12,0,50,0,0,0, 'on Aggro Text'),
+(@ENTRY,0,1, 'Me smash! You die!',12,0,50,0,0,0, 'on Aggro Text'),
+(@ENTRY,0,2, 'I\'ll crush you!',12,0,50,0,0,0, 'on Aggro Text');
+
+-- Elder Stormhoof <Grimtotem Chief>
+SET @ENTRY := 45410;
+UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry`=@ENTRY;
+DELETE FROM `smart_scripts` WHERE `source_type`=0 AND `entryorguid`=@ENTRY;
+INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
+(@ENTRY,0,0,1,4,0,100,1,0,0,0,0,21,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Stop Moving on Aggro'),
+(@ENTRY,0,1,2,4,0,100,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Say Text on Aggro'),
+(@ENTRY,0,2,0,61,0,100,1,0,0,0,0,22,1,0,0,0,0,0,1,0,0,0,0,0,0,0,'Set Phase 1 on Aggro'),
+(@ENTRY,0,3,0,0,1,100,0,3000,4500,25000,27000,11,85862,0,0,0,0,0,1,0,0,0,0,0,0,0,'Cast Stomp'),
+(@ENTRY,0,4,5,2,1,100,1,0,75,0,0,22,2,0,0,0,0,0,1,0,0,0,0,0,0,0,'Set Phase 2 at 75% HP'),
+(@ENTRY,0,5,6,61,1,100,1,0,75,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,'Sat Text at 75% HP'),
+(@ENTRY,0,6,7,61,1,100,1,0,75,0,0,11,85695,0,0,0,0,0,1,0,0,0,0,0,0,0,'Cast Commune With Spirits at 75% HP'),
+(@ENTRY,0,7,0,61,1,100,1,0,75,0,0,11,85709,0,0,0,0,0,1,0,0,0,0,0,0,0,'Cast Blessed by Fire at 75% HP'),
+(@ENTRY,0,8,0,0,2,100,0,6000,8000,33000,36000,11,85714,0,0,0,0,0,2,0,0,0,0,0,0,0,'Cast Lava Burst'),
+(@ENTRY,0,9,0,0,2,100,0,12000,16000,19000,21000,11,85718,0,0,0,0,0,2,0,0,0,0,0,0,0,'Cast Firebloom Burst'),
+(@ENTRY,0,10,11,2,2,100,1,0,50,0,0,22,4,0,0,0,0,0,1,0,0,0,0,0,0,0,'Set Phase 3 at 50% HP'),
+(@ENTRY,0,11,12,61,2,100,1,0,50,0,0,1,2,0,0,0,0,0,1,0,0,0,0,0,0,0,'Sat Text at 50% HP'),
+(@ENTRY,0,12,13,61,2,100,1,0,50,0,0,11,85707,0,0,0,0,0,1,0,0,0,0,0,0,0,'Cast Commune With Spirits at 50% HP'),
+(@ENTRY,0,13,0,61,2,100,1,0,50,0,0,11,85711,0,0,0,0,0,1,0,0,0,0,0,0,0,'Cast Blessed by Air at 50% HP'),
+(@ENTRY,0,14,0,0,4,100,0,2000,4500,12000,15000,11,85715,0,0,0,0,0,2,0,0,0,0,0,0,0,'Cast Chain Lightning'),
+(@ENTRY,0,15,0,6,4,100,1,0,0,0,0,1,3,0,0,0,0,0,1,0,0,0,0,0,0,0,'Say Text on Death');
+-- NPC talk text insert
+SET @ENTRY := 45410;
+DELETE FROM `creature_text` WHERE `entry`=@ENTRY;
+INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
+(@ENTRY,0,0, 'The Chosen of the Elder Crone! You don\'t realize yet, do you? I\'ll put an end to you first! You and your friend!',14,0,100,0,0,0, 'on Aggro Text'),
+(@ENTRY,1,0, 'Spirits of the Firelands, fill me with your rage!',14,0,100,0,0,0, 'in Battle Text'),
+(@ENTRY,2,0, 'Spirits of the Skywall, hear my call!',14,0,100,0,0,0, 'in Battle Text'),
+(@ENTRY,3,0, 'Why would she choose... an outsider?',12,0,100,0,0,0, 'on Death Text');
+
+
 
 
 
